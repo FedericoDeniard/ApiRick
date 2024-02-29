@@ -31,16 +31,8 @@ function App() {
 
   useEffect(() => {
     getCharacters(pageNumber);
-    if (pageNumber === 1) {
-      setDisablePrevButton(!disablePrevButton);
-    } else {
-      setDisablePrevButton(false);
-    }
-    if (pageNumber === apiInfo?.info?.pages) {
-      setDisableNextButton(!disableNextButton);
-    } else {
-      setDisableNextButton(false);
-    }
+    setDisablePrevButton(pageNumber === 1);
+    setDisableNextButton(pageNumber === apiInfo?.info?.pages);
   }, [pageNumber]);
 
   const genderPicMap = {
