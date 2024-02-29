@@ -8,6 +8,7 @@
     width: 400px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .card h4 {
@@ -31,14 +32,24 @@
 
 .character-info {
     font-weight: 600;
-}
-
-.character-info__status {
     display: flex;
-    gap: 20px;
-    align-items: center;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.character-info__status-pic {
+.character-info p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.character-info p span {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.character-info__pic {
     height: 20px;
 }

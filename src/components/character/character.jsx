@@ -18,15 +18,19 @@ const Character = ({
       </h4>
       <img className="character-pic" src={characterImg} />
       <div className="character-info">
-        <p className="character-info__status">
-          Status: {characterStatus}
-          <img
-            className="character-info__status-pic"
-            src={characterStatusPic}
-          />
+        <p>
+          Status:{" "}
+          <span>
+            {characterStatus}
+            <img className="character-info__pic" src={characterStatusPic} />
+          </span>
         </p>
-        <p>Specie: {characterSpecie}</p>
-        <p>Location: {characterLastKnown}</p>
+        <p>
+          Specie: <span>{characterSpecie}</span>
+        </p>
+        <p>
+          Location: <span>{characterLastKnown}</span>
+        </p>
       </div>
     </div>
   );
