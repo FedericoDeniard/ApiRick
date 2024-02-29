@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useRef } from "react";
 import { useState } from "react";
 import "./App.css";
 import Character from "./components/character/character";
@@ -44,22 +43,15 @@ function App() {
     }
   }, [pageNumber]);
 
-  const getCharacterGenderPic = (gender) => {
-    if (gender === "Female") {
-      return FemaleSvg;
-    } else if (gender === "Male") {
-      return MaleSvg;
-    } else {
-      return UnknownSvg;
-    }
+  const genderPicMap = {
+    Female: FemaleSvg,
+    Male: MaleSvg,
+    Unknown: UnknownSvg,
   };
 
-  const getCharacterStatusPic = (status) => {
-    if (status === "Alive") {
-      return AliveSvg;
-    } else {
-      return DeadSvg;
-    }
+  const characterStatusPic = {
+    Alive: AliveSvg,
+    Dead: DeadSvg,
   };
 
   return (
@@ -77,10 +69,10 @@ function App() {
                   characterName={character.name}
                   characterImg={character.image}
                   characterStatus={character.status}
-                  characterStatusPic={getCharacterStatusPic(character.status)}
+                  characterStatusPic={characterStatusPic[character.status]}
                   characterSpecie={character.species}
                   characterLastKnown={character.location.name}
-                  characterGender={getCharacterGenderPic(character.gender)}
+                  characterGender={genderPicMap[character.gender]}
                 />
               ))}
             </>
