@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./App.css";
 import Character from "./components/character/character";
+import female from "/images/female.svg";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -33,6 +34,12 @@ function App() {
     }
   }, [pageNumber]);
 
+  const getCharacterGender = (gender) => {
+    if (gender == "Female") {
+      return female;
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -50,7 +57,9 @@ function App() {
                   characterStatus={character.status}
                   characterSpecie={character.species}
                   characterLastKnown={character.location.name}
-                  characterGender={`src/assets/images/${character.gender}.svg`}
+                  characterGender={() => {
+                    getCharacterGender(character.gender);
+                  }}
                 />
               ))}
             </>

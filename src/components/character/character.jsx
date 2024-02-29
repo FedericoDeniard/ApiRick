@@ -1,4 +1,5 @@
 import "./character.css";
+import female from "/images/Female.svg";
 
 const Character = ({
   characterName,
@@ -18,6 +19,7 @@ const Character = ({
       <div className="character-info">
         <p className="character-info__status">
           Status: {characterStatus}
+          {characterGender}
           <img className="character-info__status-pic" />
         </p>
         <p>Specie: {characterSpecie}</p>
