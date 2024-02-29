@@ -6,6 +6,7 @@ const Character = ({
   characterImg,
   characterGender,
   characterStatus,
+  characterStatusPic,
   characterSpecie,
   characterLastKnown,
 }) => {
@@ -19,8 +20,10 @@ const Character = ({
       <div className="character-info">
         <p className="character-info__status">
           Status: {characterStatus}
-          {characterGender}
-          <img className="character-info__status-pic" />
+          <img
+            className="character-info__status-pic"
+            src={characterStatusPic}
+          />
         </p>
         <p>Specie: {characterSpecie}</p>
         <p>Location: {characterLastKnown}</p>

@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./App.css";
 import Character from "./components/character/character";
-import female from "/images/female.svg";
+import FemaleSvg from "../public/images/Female.svg";
+import MaleSvg from "../public/images/Male.svg";
+import UnknownSvg from "../public/images/Unknown.svg";
+import AliveSvg from "../public/images/alive.svg";
+import DeadSvg from "../public/images/dead.svg";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -34,9 +38,21 @@ function App() {
     }
   }, [pageNumber]);
 
-  const getCharacterGender = (gender) => {
-    if (gender == "Female") {
-      return female;
+  const getCharacterGenderPic = (gender) => {
+    if (gender === "Female") {
+      return FemaleSvg;
+    } else if (gender === "Male") {
+      return MaleSvg;
+    } else {
+      return UnknownSvg;
+    }
+  };
+
+  const getCharacterStatusPic = (status) => {
+    if (status === "Alive") {
+      return AliveSvg;
+    } else {
+      return DeadSvg;
     }
   };
 
@@ -55,11 +71,10 @@ function App() {
                   characterName={character.name}
                   characterImg={character.image}
                   characterStatus={character.status}
+                  characterStatusPic={getCharacterStatusPic(character.status)}
                   characterSpecie={character.species}
                   characterLastKnown={character.location.name}
-                  characterGender={() => {
-                    getCharacterGender(character.gender);
-                  }}
+                  characterGender={getCharacterGenderPic(character.gender)}
                 />
               ))}
             </>
@@ -67,6 +82,7 @@ function App() {
         </div>
         <div className="container-buttons">
           <button onClick={() => changePage(-1)}>Prev Page</button>
+          <span>{pageNumber}</span>
           <button onClick={() => changePage(+1)}>Next Page</button>
         </div>
       </div>
