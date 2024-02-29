@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import "./App.css";
 import Character from "./components/character/character";
@@ -26,15 +27,20 @@ function App() {
       });
   };
 
+  const [disablePrevButton, setDisablePrevButton] = useState(false);
+  const [disableNextButton, setDisableNextButton] = useState(false);
+
   useEffect(() => {
     getCharacters(pageNumber);
-    console.log(pageNumber);
-    if (pageNumber < 1) {
-      setPageNumber(1);
-    } else if (apiInfo && apiInfo.info && apiInfo.info.pages) {
-      if (pageNumber > apiInfo.info.pages) {
-        setPageNumber(apiInfo.info.pages);
-      }
+    if (pageNumber === 1) {
+      setDisablePrevButton(!disablePrevButton);
+    } else {
+      setDisablePrevButton(false);
+    }
+    if (pageNumber === apiInfo?.info?.pages) {
+      setDisableNextButton(!disableNextButton);
+    } else {
+      setDisableNextButton(false);
     }
   }, [pageNumber]);
 
@@ -81,9 +87,13 @@ function App() {
           )}
         </div>
         <div className="container-buttons">
-          <button onClick={() => changePage(-1)}>Prev Page</button>
+          <button disabled={disablePrevButton} onClick={() => changePage(-1)}>
+            Prev Page
+          </button>
           <span>{pageNumber}</span>
-          <button onClick={() => changePage(+1)}>Next Page</button>
+          <button disabled={disableNextButton} onClick={() => changePage(+1)}>
+            Next Page
+          </button>
         </div>
       </div>
     </>
