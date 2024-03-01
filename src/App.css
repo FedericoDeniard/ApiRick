@@ -110,10 +110,25 @@
     border: 2px solid #000;
 }
 
-.gender-tooltip:hover .gender-tooltip__container,
-.status-tooltip:hover .status-tooltip__container {
-    transform: translateY(50%);
+.gender-tooltip:hover .gender-tooltip__container {
+    transform: translateY(30%);
     opacity: 1;
+}
+
+.status-tooltip:hover .status-tooltip__container {
+    transform: translateY(42%);
+    opacity: 1;
+}
+
+.gender-tooltip__container span,
+.status-tooltip__container span {
+    padding: 3px;
+}
+
+.gender-tooltip__container span:hover,
+.status-tooltip__container span:hover {
+    background-color: #ddd;
+    border-radius: 5px;
 }
 
 .active-gender__filter,
@@ -135,58 +150,25 @@
     transform: rotate(180deg);
 }
 
-/* .gender-tooltip-male,
-.gender-tooltip-female,
-.gender-tooltip-unknown {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    transition: all .3s;
-
-    padding: 2px;
-    width: 80px;
-}
-
-.gender-tooltip-male {
-    left: 50%;
-}
-
-.gender-tooltip-female {
-    left: 50%;
-}
-
-.gender-tooltip-unknown {
-    left: 50%;
-}
-
-.gender-tooltip:hover .gender-tooltip-male {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(100%);
-}
-
-.gender-tooltip:hover .gender-tooltip-female {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(200%);
-}
-
-.gender-tooltip:hover .gender-tooltip-unknown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(300%);
-} */
-
-
-
 .card-container {
     display: flex;
     gap: 10px;
     overflow-x: scroll;
 }
+
+.card-container::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #fff;
+    border: 2px solid #000;
+    height: 15px;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    background-color: #34eb92;
+    border-radius: 10px;
+    border: 2px solid #000;
+}
+
 
 .container-buttons {
     display: flex;
