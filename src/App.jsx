@@ -116,12 +116,16 @@ function App() {
     getCharacters(1);
   }, [nameFilter]);
 
+  const nameInputRef = useRef(null);
+
   const resetFilters = () => {
     setPageNumber(1);
     setStatusFilter("");
     setGenderFilter("");
     getCharacters();
     setSpecieFilter(false);
+    setNameFilter("");
+    nameInputRef.current.value = "";
   };
   return (
     <>
@@ -213,6 +217,7 @@ function App() {
           type="text"
           className="text-input__filter"
           placeholder="Search by name"
+          ref={nameInputRef}
         ></input>
         <div className="card-container" ref={charactersScroll}>
           {isLoading && (
