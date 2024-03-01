@@ -17,13 +17,15 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
 }
 
 .container-title {
@@ -95,6 +97,15 @@
     position: relative;
 }
 
+.text-input__filter {
+    outline: none;
+    min-width: 370px;
+    height: 25px;
+    width: 50%;
+    border-radius: 10px;
+    text-align: center;
+}
+
 .gender-tooltip__container,
 .status-tooltip__container {
     position: absolute;
@@ -154,6 +165,7 @@
 .card-container {
     display: flex;
     gap: 10px;
+    width: 100%;
     overflow-x: scroll;
 }
 
@@ -179,6 +191,7 @@
     border-radius: 10px;
     border: 3px solid #000;
     padding: 10px;
+    width: 100%;
 }
 
 .container-buttons button {

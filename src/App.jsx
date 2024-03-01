@@ -19,6 +19,7 @@ function App() {
   const [genderFilter, setGenderFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [specieFilter, setSpecieFilter] = useState(false);
+  const [nameFilter, setNameFilter] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +33,7 @@ function App() {
   const getCharacters = (pageNumber) => {
     setIsLoading(false);
     fetch(
-      `https://rickandmortyapi.com/api/character/?page=${pageNumber}${genderFilter}${statusFilter}`
+      `https://rickandmortyapi.com/api/character/?page=${pageNumber}${genderFilter}${statusFilter}${nameFilter}`
     )
       .then((res) => res.json())
       .then((response) => {
@@ -106,6 +107,14 @@ function App() {
       getCharacters(pageNumber);
     }
   }, [specieFilter]);
+
+  const filterByName = (e) => {
+    setNameFilter(`&name=${e}`);
+  };
+
+  useEffect(() => {
+    getCharacters(1);
+  }, [nameFilter]);
 
   const resetFilters = () => {
     setPageNumber(1);
@@ -199,6 +208,12 @@ function App() {
             <p>Location</p>
           </div>
         </header>
+        <input
+          onChange={(e) => filterByName(e.target.value)}
+          type="text"
+          className="text-input__filter"
+          placeholder="Search by name"
+        ></input>
         <div className="card-container" ref={charactersScroll}>
           {isLoading && (
             <>
