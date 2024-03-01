@@ -93,17 +93,17 @@ function App() {
   useEffect(() => {
     if (specieFilter === true) {
       const sortedCharacters = [...characters].sort((a, b) => {
-        if (a.name > b.name) {
+        if (a.species > b.species) {
           return 1;
         }
-        if (a.name < b.name) {
+        if (a.species < b.species) {
           return -1;
         }
         return 0;
       });
       setCharacters(sortedCharacters);
     } else {
-      setCharacters(getCharacters(pageNumber));
+      getCharacters(pageNumber);
     }
   }, [specieFilter]);
 
