@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import "./App.css";
 import Character from "./components/character/character";
@@ -14,16 +14,22 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [apiInfo, setApiInfo] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+
   const [genderFilter, setGenderFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [specieFilter, setSpecieFilter] = useState(false);
 
-  const [apiResponse, setApiResponse] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const charactersScroll = useRef(null);
 
   const changePage = (amount) => {
     setPageNumber(pageNumber + amount);
+    charactersScroll.current.scrollLeft = 0;
   };
 
   const getCharacters = (pageNumber) => {
+    setIsLoading(false);
     fetch(
       `https://rickandmortyapi.com/api/character/?page=${pageNumber}${genderFilter}${statusFilter}`
     )
@@ -32,7 +38,8 @@ function App() {
         setCharacters(response.results);
         setApiInfo(response);
       })
-      .finally(() => setApiResponse(true));
+      .finally(() => setIsLoading(true));
+    console.log(isLoading);
   };
 
   const [disablePrevButton, setDisablePrevButton] = useState(
@@ -44,12 +51,12 @@ function App() {
 
   useEffect(() => {
     getCharacters(pageNumber);
-    if (apiResponse === true) {
-      setDisablePrevButton(pageNumber === 1);
-      setDisableNextButton(pageNumber === apiInfo?.info?.pages);
-    }
-    console.log(apiInfo);
-  }, [pageNumber, genderFilter, statusFilter, apiResponse]);
+  }, [pageNumber, genderFilter, statusFilter]);
+
+  useEffect(() => {
+    setDisablePrevButton(pageNumber === 1);
+    setDisableNextButton(pageNumber === apiInfo?.info?.pages);
+  }, [characters]);
 
   const genderPicMap = {
     Female: FemaleSvg,
@@ -78,10 +85,33 @@ function App() {
     }
   };
 
+  const filterSpecie = () => {
+    setSpecieFilter(!specieFilter);
+  };
+
+  useEffect(() => {
+    if (specieFilter === true) {
+      const sortedCharacters = [...characters].sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      });
+      setCharacters(sortedCharacters);
+    } else {
+      setCharacters(getCharacters(pageNumber));
+    }
+  }, [specieFilter]);
+
   const resetFilters = () => {
     setPageNumber(1);
     setStatusFilter("");
     setGenderFilter("");
+    getCharacters();
+    setSpecieFilter(false);
   };
   return (
     <>
@@ -157,12 +187,12 @@ function App() {
                 </span>
               </span>
             </p>
-            <p>Specie</p>
+            <p onClick={filterSpecie}>Specie</p>
             <p>Location</p>
           </div>
         </header>
-        <div className="card-container">
-          {apiResponse && (
+        <div className="card-container" ref={charactersScroll}>
+          {isLoading && (
             <>
               {characters.map((character, i) => (
                 <Character
@@ -180,13 +210,25 @@ function App() {
           )}
         </div>
         <div className="container-buttons">
-          <button disabled={disablePrevButton} onClick={() => changePage(-1)}>
+          <button
+            disabled={disablePrevButton}
+            onClick={() => {
+              changePage(-1);
+              setSpecieFilter(false);
+            }}
+          >
             Prev Page
           </button>
           <span>{pageNumber}</span>
-          <button disabled={disableNextButton} onClick={() => changePage(+1)}>
+          <button
+            disabled={disableNextButton}
+            onClick={() => {
+              changePage(+1);
+              setSpecieFilter(false);
+            }}
+          >
             Next Page
-          </button>
+          </button>{" "}
         </div>
       </div>
     </>
