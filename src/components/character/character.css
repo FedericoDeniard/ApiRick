@@ -12,7 +12,7 @@
 }
 
 .card h4 {
-    font-size: clamp(2rem, 40px, 5rem);
+    font-size: clamp(2rem, 35px, 5rem);
     display: flex;
     align-items: center;
     justify-content: center;

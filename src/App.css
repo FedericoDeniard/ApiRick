@@ -122,6 +122,7 @@
 
 .gender-tooltip__container span,
 .status-tooltip__container span {
+    text-align: center;
     padding: 3px;
 }
 
