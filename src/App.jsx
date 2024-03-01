@@ -17,6 +17,8 @@ function App() {
   const [genderFilter, setGenderFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
 
+  const [apiResponse, setApiResponse] = useState(false);
+
   const changePage = (amount) => {
     setPageNumber(pageNumber + amount);
   };
@@ -29,7 +31,8 @@ function App() {
       .then((response) => {
         setCharacters(response.results);
         setApiInfo(response);
-      });
+      })
+      .finally(() => setApiResponse(true));
   };
 
   const [disablePrevButton, setDisablePrevButton] = useState(
@@ -41,10 +44,12 @@ function App() {
 
   useEffect(() => {
     getCharacters(pageNumber);
-    setDisablePrevButton(pageNumber === 1);
-    setDisableNextButton(pageNumber === apiInfo?.info?.pages);
+    if (apiResponse === true) {
+      setDisablePrevButton(pageNumber === 1);
+      setDisableNextButton(pageNumber === apiInfo?.info?.pages);
+    }
     console.log(apiInfo);
-  }, [pageNumber, genderFilter, statusFilter]);
+  }, [pageNumber, genderFilter, statusFilter, apiResponse]);
 
   const genderPicMap = {
     Female: FemaleSvg,
@@ -157,7 +162,7 @@ function App() {
           </div>
         </header>
         <div className="card-container">
-          {characters && characters.length > 0 && (
+          {apiResponse && (
             <>
               {characters.map((character, i) => (
                 <Character
