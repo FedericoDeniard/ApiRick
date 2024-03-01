@@ -16,25 +16,157 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .container-title {
-    color: #fff;
-    text-shadow: 2px 2px #000;
-    text-align: center;
     background-color: #34eb92;
     border-radius: 10px;
     border: 3px solid #000;
     position: relative;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
 }
 
-.container-title span {
+.container-title h1 {
+    color: #fff;
+    text-shadow: 2px 2px #000;
+    text-align: center;
+    font-size: 40px;
+    z-index: 500;
+    display: flex;
+    position: relative;
+}
+
+.container-title__rick {
+    height: 80px;
+    position: absolute;
+    bottom: -25%;
+    left: 95%;
+    z-index: -1;
+
+}
+
+.container-title__morty {
+    height: 90px;
+    position: absolute;
+    bottom: -35%;
+    right: 94%;
+    z-index: -1;
+
+}
+
+.container-title p {
     font-size: 10px;
     position: absolute;
-    bottom: 0;
     color: #000;
     text-shadow: none;
+    bottom: -20%;
+    left: 75%;
+    text-wrap: nowrap;
+    z-index: 20;
 }
+
+.header .nav {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #34eb92;
+    border-radius: 10px;
+    border: 3px solid #000;
+    font-weight: 700;
+}
+
+.nav p {
+    padding: 5px;
+    font-size: 25px;
+    cursor: pointer;
+    text-shadow: #fff 1px 1px;
+    position: relative;
+}
+
+.gender-tooltip__container,
+.status-tooltip__container {
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    display: flex;
+    flex-direction: column;
+    transition: all .3s;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: 0;
+    border: 2px solid #000;
+}
+
+.gender-tooltip:hover .gender-tooltip__container,
+.status-tooltip:hover .status-tooltip__container {
+    transform: translateY(50%);
+    opacity: 1;
+}
+
+.active-gender__filter,
+.active-status__filter {
+    background-color: #34eb92;
+    border-radius: 5px;
+    padding: 5px;
+    transition: .3s all;
+}
+
+
+/* .gender-tooltip-male,
+.gender-tooltip-female,
+.gender-tooltip-unknown {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s;
+
+    padding: 2px;
+    width: 80px;
+}
+
+.gender-tooltip-male {
+    left: 50%;
+}
+
+.gender-tooltip-female {
+    left: 50%;
+}
+
+.gender-tooltip-unknown {
+    left: 50%;
+}
+
+.gender-tooltip:hover .gender-tooltip-male {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(100%);
+}
+
+.gender-tooltip:hover .gender-tooltip-female {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(200%);
+}
+
+.gender-tooltip:hover .gender-tooltip-unknown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(300%);
+} */
+
+
 
 .card-container {
     display: flex;
@@ -59,4 +191,9 @@
     align-items: center;
     padding: 10px;
     border-radius: 10px;
+}
+
+.container-buttons span {
+    display: flex;
+    align-items: center;
 }
