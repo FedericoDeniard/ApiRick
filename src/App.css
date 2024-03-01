@@ -124,6 +124,16 @@
     transition: .3s all;
 }
 
+.specie-filter {
+    position: relative;
+}
+
+.specie-filter__arrow {
+    height: 20px;
+    position: absolute;
+    top: 30%;
+    transform: rotate(180deg);
+}
 
 /* .gender-tooltip-male,
 .gender-tooltip-female,

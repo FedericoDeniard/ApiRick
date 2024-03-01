@@ -9,6 +9,7 @@ import AliveSvg from "../public/images/alive.svg";
 import DeadSvg from "../public/images/dead.svg";
 import MortySvg from "../public/images/morty.svg";
 import RickSvg from "../public/images/rick.svg";
+import TriangeSvg from "../public/images/triangle.svg";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -187,7 +188,14 @@ function App() {
                 </span>
               </span>
             </p>
-            <p onClick={filterSpecie}>Specie</p>
+            <p className="specie-filter" onClick={filterSpecie}>
+              Specie
+              {specieFilter ? (
+                <img className="specie-filter__arrow" src={TriangeSvg} />
+              ) : (
+                ""
+              )}
+            </p>
             <p>Location</p>
           </div>
         </header>
