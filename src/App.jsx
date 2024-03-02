@@ -10,6 +10,7 @@ import DeadSvg from "../public/images/dead.svg";
 import MortySvg from "../public/images/morty.svg";
 import RickSvg from "../public/images/rick.svg";
 import TriangeSvg from "../public/images/triangle.svg";
+import ApiTitle from "../public/images/title.png";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -41,7 +42,6 @@ function App() {
         setApiInfo(response);
       })
       .finally(() => setIsLoading(true));
-    console.log(isLoading);
   };
 
   const [disablePrevButton, setDisablePrevButton] = useState(
@@ -63,7 +63,7 @@ function App() {
   const genderPicMap = {
     Female: FemaleSvg,
     Male: MaleSvg,
-    Unknown: UnknownSvg,
+    unknown: UnknownSvg,
   };
 
   const characterStatusPic = {
