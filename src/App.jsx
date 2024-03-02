@@ -131,14 +131,9 @@ function App() {
     <>
       <div className="container">
         <header className="header">
-          <span className="container-title">
-            <h1>
-              Rick & Morty API
-              <p>By Fede Deniard</p>
-              <img className="container-title__rick" src={RickSvg} />
-              <img className="container-title__morty" src={MortySvg} />
-            </h1>
-          </span>
+          <div className="header-title__container">
+            <img src={ApiTitle} className="title-img"></img>
+          </div>
           <div className="nav">
             <p onClick={resetFilters}>Characters</p>
             <p className="gender-tooltip">
