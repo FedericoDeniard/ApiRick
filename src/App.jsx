@@ -127,9 +127,7 @@ function App() {
     setNameFilter("");
     nameInputRef.current.value = "";
   };
-
-  const openTooltip = () => {};
-  return (
+  
     <>
       <div className="container">
         <header className="header">
