@@ -127,7 +127,8 @@ function App() {
     setNameFilter("");
     nameInputRef.current.value = "";
   };
-  
+
+  return (
     <>
       <div className="container">
         <header className="header">
