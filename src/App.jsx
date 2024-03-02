@@ -127,12 +127,14 @@ function App() {
     setNameFilter("");
     nameInputRef.current.value = "";
   };
+
+  const openTooltip = () => {};
   return (
     <>
       <div className="container">
         <header className="header">
           <div className="header-title__container">
-            <img src={ApiTitle} className="title-img"></img>
+            <h1 className="main-title">Rick & Morty</h1>
           </div>
           <div className="nav">
             <p onClick={resetFilters}>Characters</p>
