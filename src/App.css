@@ -51,6 +51,7 @@
         6px 6px 0 #bfde42,
         -6px -6px 0 #bfde42;
     font-size: clamp(40px, 12vw, 80px);
+    cursor: pointer;
 }
 
 
@@ -146,6 +147,14 @@
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     padding-bottom: 10px;
+}
+
+.error {
+    justify-content: center;
+}
+
+.error .card .character-pic {
+    border: none;
 }
 
 .card-container::-webkit-scrollbar {

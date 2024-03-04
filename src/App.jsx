@@ -11,6 +11,7 @@ import MortySvg from "../public/images/morty.svg";
 import RickSvg from "../public/images/rick.svg";
 import TriangeSvg from "../public/images/triangle.svg";
 import ApiTitle from "../public/images/title.png";
+import ErrorSvg from "../public/images/notfound.svg";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -23,6 +24,7 @@ function App() {
   const [nameFilter, setNameFilter] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const charactersScroll = useRef(null);
 
@@ -36,10 +38,20 @@ function App() {
     fetch(
       `https://rickandmortyapi.com/api/character/?page=${pageNumber}${genderFilter}${statusFilter}${nameFilter}`
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
       .then((response) => {
         setCharacters(response.results);
         setApiInfo(response);
+        setIsError(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching characters:", error);
+        setIsError(true);
       })
       .finally(() => setIsLoading(true));
   };
@@ -58,7 +70,12 @@ function App() {
   useEffect(() => {
     setDisablePrevButton(pageNumber === 1);
     setDisableNextButton(pageNumber === apiInfo?.info?.pages);
-  }, [characters]);
+    if (isError) {
+      setDisableNextButton(true);
+      setDisablePrevButton(true);
+      setPageNumber(1);
+    }
+  }, [characters, isError]);
 
   const genderPicMap = {
     Female: FemaleSvg,
@@ -133,7 +150,9 @@ function App() {
       <div className="container">
         <header className="header">
           <div className="header-title__container">
-            <h1 className="main-title">Rick & Morty</h1>
+            <h1 className="main-title" onClick={resetFilters}>
+              Rick & Morty
+            </h1>
           </div>
           <div className="nav">
             <p onClick={resetFilters}>Characters</p>
@@ -205,7 +224,6 @@ function App() {
                 ""
               )}
             </p>
-            <p>Location</p>
           </div>
         </header>
         <input
@@ -215,8 +233,11 @@ function App() {
           placeholder="Search by name"
           ref={nameInputRef}
         ></input>
-        <div className="card-container" ref={charactersScroll}>
-          {isLoading && (
+        <div
+          className={`card-container ${isError ? "error" : ""}`}
+          ref={charactersScroll}
+        >
+          {isLoading && !isError && (
             <>
               {characters.map((character, i) => (
                 <Character
@@ -231,6 +252,12 @@ function App() {
                 />
               ))}
             </>
+          )}
+          {isError && (
+            <div className="card">
+              <h4>No character found</h4>
+              <img className="character-pic" src={ErrorSvg} />
+            </div>
           )}
         </div>
         <div className="container-buttons">
